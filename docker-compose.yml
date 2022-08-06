@@ -1,0 +1,47 @@
+version: '3.4'
+
+services:
+  orderapi:
+    image: ${DOCKER_REGISTRY-}orderapi
+    build:
+      context: .
+      dockerfile: OrderAPI/Dockerfile
+
+  userapi:
+    image: ${DOCKER_REGISTRY-}userapi
+    build:
+      context: .
+      dockerfile: UserAPI/Dockerfile
+
+
+  addressapi:
+    image: ${DOCKER_REGISTRY-}addressapi
+    build:
+      context: .
+      dockerfile: AddressAPI/Dockerfile
+
+
+  productapi:
+    image: ${DOCKER_REGISTRY-}productapi
+    build:
+      context: .
+      dockerfile: ProductAPI/Dockerfile
+
+  mysql:
+    hostname: mysql-db
+    image: mysql:5.7
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment: 
+      MYSQL_ROOT_PASSWORD: Photosi123456!
+      MYSQL_DATABASE: photosi
+      MYSQL_TCP_PORT: 3306
+    ports:
+       - 3306:3306
+   
+volumes:
+        mysql_data:
+            driver: local     
+
+
+
